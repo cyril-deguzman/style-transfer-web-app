@@ -1,0 +1,13 @@
+body{
+    background-color:rgb(248, 242, 234);
+    background-repeat: repeat;
+}
+
+.flex_col{
+    flex-direction: column;
+}
+
+.flex_row{
+    justify-content: space-evenly;
+    display: flex;
+}

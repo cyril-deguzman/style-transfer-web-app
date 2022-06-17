@@ -1,8 +1,47 @@
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
+
 <html>
-  <head>
-    <script type=""></script>
-  </head>
-  <body>
-    
-  </body>
+    <head>
+        <title>Style Transfer</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <center>
+            <h1>IMAGE STYLE TRANSFER</h1>
+        </center>
+
+        <div class="flex_row">
+            <div class="flex_col">
+                <center>
+                    <h2>Choose an image to apply styles to:</h2><p/>
+                    <input type="file" id="change Image"name="change Image" accept="image/png,image/jpeg" imgid="image" onchange="loadImageFile(event)"><p/>
+                    <img id="image" src="#" width="500"/><p/>
+                </center>
+                
+            </div>
+            <div class="flex_col">
+                <center>
+                    <h2>Choose the style image:</h2><p/>
+                    <input type="file" id="changeStyle Image"name="changeImage" accept="image/png,image/jpeg" imgid="styleImage" onchange="loadStyleFile(event)"><p/>
+                    <img id="styleImage"src="#" width="500"/><p/>
+                </center>
+            </div>
+        </div>
+
+        <center>
+            <canvas id="stylizedImage"width="500"height="500"/>
+        </center>
+    </body>
 </html>
+
+<script>
+    var loadImageFile = function(event) {
+        var image = document.getElementById('image');
+        image.src = URL.createObjectURL(event.target.files[0]);
+    };
+
+    var loadStyleFile = function(event) {
+        var image = document.getElementById('styleImage');
+        image.src = URL.createObjectURL(event.target.files[0]);
+    };
+</script>
