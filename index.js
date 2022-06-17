@@ -13,7 +13,11 @@ let doStyleTransfer = async () => {
   const contentTensor = preprocess(content)
   const styleTensor = preprocess(style)
 
-  model.execute([contentTensor, styleTensor]).print()
+  console.log('model= ' + model)
+  const result = model.execute([styleTensor, contentTensor])
+  const canvas = document.getElementById('stylizedImage')
+
+  tf.browser.toPixels(tf.squeeze(result), canvas)
 }
 
 let preprocess = (imgData) => {
