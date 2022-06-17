@@ -1,9 +1,14 @@
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
-
 <html>
     <head>
         <title>Style Transfer</title>
         <link rel="stylesheet" href="styles.css">
+        <script
+          src="https://code.jquery.com/jquery-3.6.0.js"
+          integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+          crossorigin="anonymous">
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.12.0/dist/tf.min.js"></script>
+        <script src="index.js"></script>
     </head>
     <body>
         <center>
@@ -14,8 +19,8 @@
             <div class="flex_col">
                 <center>
                     <h2>Choose an image to apply styles to:</h2><p/>
-                    <input type="file" id="change Image"name="change Image" accept="image/png,image/jpeg" imgid="image" onchange="loadImageFile(event)"><p/>
-                    <img id="image" src="#" width="500"/><p/>
+                    <input type="file" id="change Image" name="change Image" accept="image/png,image/jpeg" imgid="image" onchange="loadImageFile(event)"><p/>
+                    <img id="content" src="#" width="500"/><p/>
                 </center>
                 
             </div>
@@ -23,7 +28,7 @@
                 <center>
                     <h2>Choose the style image:</h2><p/>
                     <input type="file" id="changeStyle Image"name="changeImage" accept="image/png,image/jpeg" imgid="styleImage" onchange="loadStyleFile(event)"><p/>
-                    <img id="styleImage"src="#" width="500"/><p/>
+                    <img id="style"src="#" width="500"/><p/>
                 </center>
             </div>
         </div>
@@ -33,15 +38,3 @@
         </center>
     </body>
 </html>
-
-<script>
-    var loadImageFile = function(event) {
-        var image = document.getElementById('image');
-        image.src = URL.createObjectURL(event.target.files[0]);
-    };
-
-    var loadStyleFile = function(event) {
-        var image = document.getElementById('styleImage');
-        image.src = URL.createObjectURL(event.target.files[0]);
-    };
-</script>
