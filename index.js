@@ -1,66 +1,98 @@
-$(document).ready(function() {
-
-});
-
-let getModel = async () => model = await tf.loadGraphModel('./model/model.json');
-
-let doStyleTransfer = async () => {
-  console.log('style transferring...')
-  const model = await getModel();
-  console.log('model= ' + model)
+$(document).ready(async () => {
+  const model_pred = await tflite.loadTFLiteModel('https://tfhub.dev/google/lite-model/magenta/arbitrary-image-stylization-v1-256/int8/prediction/1')
+  const model_transfer = await tflite.loadTFLiteModel('https://tfhub.dev/google/lite-model/magenta/arbitrary-image-stylization-v1-256/int8/transfer/1')
   
-  const content = $("#content")[0];
-  const style = $("#style")[0];
+  let test = async() =>{
+    const content = $("#content")[0]
+    const style = $("#style")[0]
 
-  const contentTensor = preprocess(content);
-  const styleTensor = preprocess(style);
+    const styleTensor = preprocess(style)
+    let outputTensor = model_pred.predict(styleTensor)
 
-  const result = model.execute([styleTensor, contentTensor]);
-  const canvas = document.getElementById('stylizedImage');
-
-  tf.browser.toPixels(tf.squeeze(result), canvas);
-}
-
-let getRatio = (image) => {
-  const maxSize = 256;
-  width = image.shape[0];
-  height = image.shape[1];
-
-  if(width > height) {
-    percent = height / width;
-    return [maxSize, Math.floor(maxSize * percent)];
+    console.log(outputTensor)
   }
-    
-  else {
-    percent = width / height;
-    return [Math.floor(maxSize * percent), maxSize];
+  
+  let doStyleTransfer = async () => {
+    console.log('style transferring...')
+  
+    const content = $("#content")[0]
+    const style = $("#style")[0]
+  
+    const contentTensor = preprocess(content)
+    const styleTensor = preprocess(style)
+  
+    const result = model.execute([styleTensor, contentTensor])
+    const canvas = document.getElementById('stylizedImage')
+  
+    tf.browser.toPixels(tf.squeeze(result), canvas);
   }
-}
+  
+  let getRatio = (image) => {
+    const maxSize = 256;
+    width = image.shape[0];
+    height = image.shape[1];
+  
+    if(width > height) {
+      percent = height / width;
+      return [maxSize, Math.floor(maxSize * percent)];
+    }
+      
+    else {
+      percent = width / height;
+      return [Math.floor(maxSize * percent), maxSize];
+    }
+  }
+  
+  let preprocess = (imgData) => {
+   return tf.tidy(()=>{
+    // convert the image data to a tensor
+    let tensor = tf.browser.fromPixels(imgData, numChannels=3);
+    //let ratio = getRatio(tensor)
+    const resized = tf.image.resizeBilinear(tensor, [256,256]).toFloat()
+  
+    // Normalize the image 
+    const offset = tf.scalar(255.0);
+    const normalized = resized.div(offset);
+  
+    //We add a dimension to get a batch shape 
+    const batched = normalized.expandDims(0);
+    return batched;
+   })
+  }
 
-let preprocess = (imgData) => {
- return tf.tidy(()=>{
-  // convert the image data to a tensor
-  let tensor = tf.browser.fromPixels(imgData, numChannels=3);
-  let ratio = getRatio(tensor)
-  const resized = tf.image.resizeBilinear(tensor, ratio).toFloat()
+  let preprocess2 = (imgData) => {
+    return tf.tidy(()=>{
+     // convert the image data to a tensor
+     let tensor = tf.browser.fromPixels(imgData, numChannels=3);
+     //let ratio = getRatio(tensor)
+     const resized = tf.image.resizeBilinear(tensor, [384,384]).toFloat()
+   
+     // Normalize the image 
+     const offset = tf.scalar(255.0);
+     const normalized = resized.div(offset);
+   
+     //We add a dimension to get a batch shape 
+     const batched = normalized.expandDims(0);
+     return batched;
+    })
+   }
+  
+  $('#selectStyle').change((e)=>{
+    alert('changed')
+    let image = document.getElementById('style');
+    image.src = URL.createObjectURL(e.target.files[0]);
+    test()
+  })
 
-  // Normalize the image 
-  const offset = tf.scalar(255.0);
-  const normalized = resized.div(offset);
+  let loadImageFile = function(event) {
+    let image = document.getElementById('content');
+    image.src = URL.createObjectURL(event.target.files[0]);
+  }
+  
+  let loadStyleFile = function(event) {
+    let image = document.getElementById('style');
+    image.src = URL.createObjectURL(event.target.files[0]);
+    test()
+  }
+})
 
-  //We add a dimension to get a batch shape 
-  const batched = normalized.expandDims(0);
-  return batched;
- })
-}
-
-let loadImageFile = function(event) {
-  let image = document.getElementById('content');
-  image.src = URL.createObjectURL(event.target.files[0]);
-};
-
-let loadStyleFile = function(event) {
-  let image = document.getElementById('style');
-  image.src = URL.createObjectURL(event.target.files[0]);
-  doStyleTransfer();
-};

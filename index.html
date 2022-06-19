@@ -7,7 +7,11 @@
           integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
           crossorigin="anonymous">
         </script>
+        
         <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.12.0/dist/tf.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-core"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-tflite/dist/tf-tflite.min.js"></script>
+
         <script src="index.js"></script>
     </head>
     <body>
@@ -19,7 +23,7 @@
             <div class="flex_col">
                 <center>
                     <h2>Choose an image to apply styles to:</h2><p/>
-                    <input type="file" id="change Image" name="change Image" accept="image/png,image/jpeg" imgid="image" onchange="loadImageFile(event)"><p/>
+                    <input id ='selectContent' type="file" id="change Image" name="change Image" accept="image/png,image/jpeg" imgid="image"><p/>
                     <img id="content" src="#" width="500"/><p/>
                 </center>
                 
@@ -27,7 +31,7 @@
             <div class="flex_col">
                 <center>
                     <h2>Choose the style image:</h2><p/>
-                    <input type="file" id="changeStyle Image"name="changeImage" accept="image/png,image/jpeg" imgid="styleImage" onchange="loadStyleFile(event)"><p/>
+                    <input id='selectStyle'type="file" id="changeStyle Image"name="changeImage" accept="image/png,image/jpeg" imgid="styleImage"><p/>
                     <img id="style"src="#" width="500"/><p/>
                 </center>
             </div>
