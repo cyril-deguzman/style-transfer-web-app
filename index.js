@@ -62,5 +62,4 @@ let loadImageFile = function(event) {
 let loadStyleFile = function(event) {
   let image = document.getElementById('style');
   image.src = URL.createObjectURL(event.target.files[0]);
-  doStyleTransfer();
 };

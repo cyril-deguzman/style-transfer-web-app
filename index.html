@@ -26,39 +26,42 @@
 		<script src="index.js"></script>
 	</head>
 	<body>
-		<center>
+		<div class="text-center">
 			<h1>IMAGE STYLE TRANSFER</h1>
-		</center>
+		</div>
 
 		<div class="container">
-			<div class="row align-items-center">
-				<div class="col text-center">
-					<h2>Content Image</h2>
-					<input
-						type="file"
-						class="form-control-file"
-						id="changeImage"
-						name="changeImage"
-						accept="image/png,image/jpeg"
-						imgid="image"
-						onchange="loadImageFile(event)"
-					/>
+			<form onSubmit="doStyleTransfer(); return false;">
+				<div class="row align-items-center form-group">
+					<div class="col text-center">
+						<h2>Content Image</h2>
+						<input
+							type="file"
+							class="form-control-file"
+							id="changeImage"
+							name="changeImage"
+							accept="image/png,image/jpeg"
+							imgid="image"
+							onchange="loadImageFile(event)"
+						/>
+					</div>
+					<div class="col text-center">
+						<h2>Style Image</h2>
+						<input
+							type="file"
+							id="changeStyleImage"
+							name="changeImage"
+							accept="image/png,image/jpeg"
+							imgid="styleImage"
+							onchange="loadStyleFile(event)"
+						/>
+					</div>
+					<div class="col text-center">
+						<h2>Stylized Image</h2>
+						<button type="submit" class="btn btn-primary">Style It!</button>
+					</div>
 				</div>
-				<div class="col text-center">
-					<h2>Style Image</h2>
-					<input
-						type="file"
-						id="changeStyleImage"
-						name="changeImage"
-						accept="image/png,image/jpeg"
-						imgid="styleImage"
-						onchange="loadStyleFile(event)"
-					/>
-				</div>
-				<div class="col text-center">
-					<h2>Stylized Image</h2>
-				</div>
-			</div>
+			</form>
 
 			<div class="row align-items-center">
 				<div class="col text-center">
