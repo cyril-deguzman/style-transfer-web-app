@@ -26,53 +26,64 @@
 		<script src="index.js"></script>
 	</head>
 	<body>
-		<div class="text-center">
-			<h1>IMAGE STYLE TRANSFER</h1>
-		</div>
+		<div class="fullscreen d-flex flex-column justify-content-between">
+			<div>
+				<div class="text-center bground-color-orange">
+					<h1>IMAGE STYLE TRANSFER</h1>
+				</div>
 
-		<div class="container">
-			<form onSubmit="doStyleTransfer(); return false;">
-				<div class="row align-items-center form-group">
-					<div class="col text-center">
-						<h2>Content Image</h2>
-						<input
-							type="file"
-							class="form-control-file"
-							id="changeImage"
-							name="changeImage"
-							accept="image/png,image/jpeg"
-							imgid="image"
-							onchange="loadImageFile(event)"
-						/>
-					</div>
-					<div class="col text-center">
-						<h2>Style Image</h2>
-						<input
-							type="file"
-							id="changeStyleImage"
-							name="changeImage"
-							accept="image/png,image/jpeg"
-							imgid="styleImage"
-							onchange="loadStyleFile(event)"
-						/>
-					</div>
-					<div class="col text-center">
-						<h2>Stylized Image</h2>
-						<button type="submit" class="btn btn-primary">Style It!</button>
-					</div>
-				</div>
-			</form>
+				<div class="container">
+					<form onSubmit="doStyleTransfer(); return false;">
+						<div class="row align-items-center form-group">
+							<div class="col text-center">
+								<h2>Content Image</h2>
+								<input
+									type="file"
+									class="form-control"
+									id="changeImage"
+									name="changeImage"
+									accept="image/png,image/jpeg"
+									imgid="image"
+									onchange="loadImageFile(event)"
+								/>
+							</div>
 
-			<div class="row align-items-center">
-				<div class="col text-center">
-					<img id="content" class="img-fluid" src="#" />
+							<div class="col text-center">
+								<h2>Style Image</h2>
+								<input
+									type="file"
+									class="form-control"
+									id="changeStyleImage"
+									name="changeImage"
+									accept="image/png,image/jpeg"
+									imgid="styleImage"
+									onchange="loadStyleFile(event)"
+								/>
+							</div>
+
+							<div class="col text-center">
+								<h2>Stylized Image</h2>
+								<button type="submit" class="btn btn-primary">Style It!</button>
+							</div>
+						</div>
+					</form>
+
+					<div class="row align-items-center">
+						<div class="col text-center">
+							<img id="content" class="img-fluid" src="#" />
+						</div>
+						<div class="col text-center">
+							<img id="style" class="img-fluid" src="#" />
+						</div>
+						<div class="col text-center">
+							<canvas id="stylizedImage" width="256" height="256"></canvas>
+						</div>
+					</div>
 				</div>
-				<div class="col text-center">
-					<img id="style" class="img-fluid" src="#" />
-				</div>
-				<div class="col text-center">
-					<canvas id="stylizedImage" width="256" height="256"></canvas>
-				</div>
+			</div>
+
+			<div class="text-center bground-color-orange">
+				<p>DIGIMAP S13 | DE GUZMAN - REBONG - RONCAL</p>
 			</div>
 		</div>
 	</body>

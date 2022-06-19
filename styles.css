@@ -1,6 +1,26 @@
 body {
     background-color:rgb(248, 242, 234);
     background-repeat: repeat;
+    margin: 0;
+}
+
+.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    overflow: auto;
+}
+
+.row {
+    margin-top: 25px;
+}
+
+h1 {
+    color: white;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 h2 {
@@ -8,6 +28,18 @@ h2 {
     font-weight: bold;
 }
 
-.row {
-    margin-top: 1%;
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    background-color: #DEA15E !important;
+    border-color: #DEA15E;
+}
+
+.bground-color-orange {
+    background-color: #DEA15E;
+}
+
+p {
+    color: white;
+    margin-bottom: 0;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
