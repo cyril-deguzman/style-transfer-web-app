@@ -2,7 +2,7 @@ $(document).ready(function() {
 
 });
 
-let getModel = async () => model = await tf.loadGraphModel('model/model.json');
+let getModel = async () => model = await tf.loadGraphModel('./model/model.json');
 
 let doStyleTransfer = async () => {
   const model = await getModel();
