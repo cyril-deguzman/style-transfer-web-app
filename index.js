@@ -5,8 +5,10 @@ $(document).ready(function() {
 let getModel = async () => model = await tf.loadGraphModel('./model/model.json');
 
 let doStyleTransfer = async () => {
+  console.log('style transferring...')
   const model = await getModel();
-
+  console.log('model= ' + model)
+  
   const content = $("#content")[0];
   const style = $("#style")[0];
 
