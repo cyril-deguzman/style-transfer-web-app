@@ -5,8 +5,9 @@ body {
 
 h2 {
     font-size: medium;
+    font-weight: bold;
 }
 
 .row {
-    margin-bottom: 1%;
+    margin-top: 1%;
 }
