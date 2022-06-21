@@ -26,14 +26,14 @@
 		<script src="index.js"></script>
 	</head>
 	<body>
-		<div class="fullscreen d-flex flex-column justify-content-between">
+		<div id="body" class="d-flex flex-column justify-content-between">
 			<div>
 				<div class="text-center bground-color-orange">
 					<h1>IMAGE STYLE TRANSFER</h1>
 				</div>
 
 				<div class="container">
-					<form onSubmit="doStyleTransfer(); return false;">
+					<form>
 						<div class="row align-items-center form-group">
 							<div class="col text-center">
 								<h2>Content Image</h2>
@@ -63,7 +63,7 @@
 
 							<div class="col text-center">
 								<h2>Stylized Image</h2>
-								<button type="submit" class="btn btn-primary">Style It!</button>
+								<button id="style-btn" type="btn" class="btn btn-primary" disabled>Style It!</button>
 							</div>
 						</div>
 					</form>
@@ -86,5 +86,8 @@
 				<p>DIGIMAP S13 | DE GUZMAN - REBONG - RONCAL</p>
 			</div>
 		</div>
+    <div class="progress">
+      <div id="progress-bar" class="progress-bar bg-success" role="progressbar" style="width: 0%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">downloading model...</div>
+    </div>
 	</body>
 </html>

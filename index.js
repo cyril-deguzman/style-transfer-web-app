@@ -1,25 +1,36 @@
-$(document).ready(function() {
+$(document).ready(async() => {
+  const model = await getModel()
+  const btn = $('#style-btn')
 
+  btn.click((e)=>{
+    e.preventDefault()
+    console.log('style transferring...')
+    console.log('model= ' + model)
+    
+    const content = $("#content")[0];
+    const style = $("#style")[0];
+  
+    const contentTensor = preprocess(content);
+    const styleTensor = preprocess(style);
+  
+    const result = model.execute([styleTensor, contentTensor]);
+    const canvas = document.getElementById('stylizedImage');
+  
+    tf.browser.toPixels(tf.squeeze(result), canvas);
+  })
 });
 
-let getModel = async () => model = await tf.loadGraphModel('./model/model.json');
+let getModel = async () => model = await tf.loadGraphModel('./model/model.json', {onProgress: (progress)=>{
+  const btn = $('#style-btn')
 
-let doStyleTransfer = async () => {
-  console.log('style transferring...')
-  const model = await getModel();
-  console.log('model= ' + model)
+  const progressed = Math.floor(progress*100)
+  const progressBar = $('#progress-bar')
   
-  const content = $("#content")[0];
-  const style = $("#style")[0];
-
-  const contentTensor = preprocess(content);
-  const styleTensor = preprocess(style);
-
-  const result = model.execute([styleTensor, contentTensor]);
-  const canvas = document.getElementById('stylizedImage');
-
-  tf.browser.toPixels(tf.squeeze(result), canvas);
-}
+  if(progressed >= 100)
+    btn.removeAttr("disabled")
+    progressBar.text('model downloaded')
+  progressBar.css('width', `${progressed}%`)
+}});
 
 let getRatio = (image) => {
   const maxSize = 256;

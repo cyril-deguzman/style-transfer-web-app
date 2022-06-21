@@ -43,3 +43,7 @@ p {
     padding-top: 5px;
     padding-bottom: 5px;
 }
+
+#body {
+  height: 98.4vh
+}
