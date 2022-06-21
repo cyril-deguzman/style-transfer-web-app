@@ -26,9 +26,13 @@ let getModel = async () => model = await tf.loadGraphModel('./model/model.json',
   const progressed = Math.floor(progress*100)
   const progressBar = $('#progress-bar')
   
-  if(progressed >= 100)
+  console.log(`download progress: ${progressed}%`)
+
+  if(progressed >= 100) {
     btn.removeAttr("disabled")
     progressBar.text('model downloaded')
+  }
+
   progressBar.css('width', `${progressed}%`)
 }});
 
